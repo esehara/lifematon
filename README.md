@@ -1,10 +1,9 @@
 # Lifematon
 
-TODO: Write a gem description
+Simple Encoding for Your Life
 
 ## Installation
 
-Add this line to your application's Gemfile:
 
 ```ruby
 gem 'lifematon'
@@ -20,7 +19,45 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Set State -- String#state!
+
+```ruby
+"b".state! "Born"
+````
+
+### Merge state -- String#state_merge
+
+```ruby
+life = "b".state! "Born"
+life.state_merge([
+  "s".state!("Study"),
+  "d".state!("Die")
+  ])
+```
+
+### Write Your Life -- String#life!
+
+```ruby
+life = "s".state! "Study"
+life.life! "sssssssss"
+```
+
+### And Decode! -- String#to_life
+
+```ruby
+life = "s".state! "Study"
+life.life! "sss"
+life.to_life # => ["Study", "Study", "Study"]
+```
+
+### Raw string with your life? -- String#by_life
+
+```ruby
+life = "b".state! "Born"
+life = life.state_merge(["s".state!("Study"), "d".state!("Die")])
+life = life.life "bsssd"
+life.match(/s+/) { |md| md[0].by_life life } # => ["Study", "Study", "Study"]
+```
 
 ## Contributing
 
