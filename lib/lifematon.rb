@@ -7,7 +7,7 @@ class String
     return self
   end
 
-  def life!(str)
+  def life(str)
     str.set_life_hash! @lifes
   end
 
